@@ -1,0 +1,40 @@
+<p>Company: <strong><%= @company.name %></strong></p>
+
+<h2>Operations</h2>
+<% @company.operations.each do |operation| %>
+  <p>invoice nom:<%= operation.invoice_num %></p>
+  <p>invoice date:<%= operation.invoice_date %></p>
+  <p>operation_date:<%= operation.operation_date %></p>
+  <p>amount:<%= operation.amount %></p>
+  <p>reporter:<%= operation.reporter %></p>
+  <p>notes:<%= operation.notes %></p>
+  <p>status:<%= operation.status %></p>
+  <p>kind:<%= operation.kind %></p>
+  <p>
+    <%#= link_to 'Delete Comment', [comment.article, comment],
+                 method:  :delete,
+                 data: { confirm: 'Are you sure?' } %>
+  </p>
+<% end %>
+
+  <h2>Add Operation</h2>
+  <%= form_for([@company, @company.operations.build]) do |f| %>
+
+    <p><%= f.label :invoice_num %><%= f.text_field :invoice_num %></p>
+    <p><%= f.label :invoice_date %><%= f.date_select :invoice_date %></p>
+    <p><%= f.label :operation_date %><%= f.date_select :operation_date %></p>
+    <p><%= f.label :amount %><%= f.text_field :amount %></p>
+    <p><%= f.label :reporter %><%= f.text_field :reporter %></p>
+    <p><%= f.label :notes %><%= f.text_area :notes %></p>
+    <p><%= f.label :status %><%= f.text_field :status %></p>
+    <p><%= f.label :kind %><%= f.text_field :kind %></p>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
+
+
+<br/>
+<%= link_to 'Back', companies_path %>
+<%= link_to 'Edit', edit_company_path(@company) %>
+     
