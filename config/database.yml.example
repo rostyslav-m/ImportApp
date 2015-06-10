@@ -83,3 +83,4 @@ production:
   database: ImportApp_production
   username: ImportApp
   password: <%= ENV['IMPORTAPP_DATABASE_PASSWORD'] %>
+

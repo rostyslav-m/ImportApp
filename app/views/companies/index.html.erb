@@ -10,6 +10,8 @@
     <% @companies.each do |company| %>
       <tr>
         <td><%= company.name %></td>
+        <td><%= company.operations.count %></td>
+        <td><%= company.total_amount %></td>
         <td><%= link_to 'Show', company_path(company) %></td>
         <td><%= link_to 'Edit', edit_company_path(company) %></td>
         <td><%= link_to 'Destroy', company_path(company),

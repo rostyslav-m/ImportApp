@@ -1,23 +1,42 @@
 <p>Company: <strong><%= @company.name %></strong></p>
 
-<h2>Operations</h2>
-<% @company.operations.each do |operation| %>
-  <p>invoice nom:<%= operation.invoice_num %></p>
-  <p>invoice date:<%= operation.invoice_date %></p>
-  <p>operation_date:<%= operation.operation_date %></p>
-  <p>amount:<%= operation.amount %></p>
-  <p>reporter:<%= operation.reporter %></p>
-  <p>notes:<%= operation.notes %></p>
-  <p>status:<%= operation.status %></p>
-  <p>kind:<%= operation.kind %></p>
-  <p>
-    <%#= link_to 'Delete Comment', [comment.article, comment],
+Operations count: <%= @company.operations.count %><br>
+Ttotal amount: <%= @company.total_amount %><br>
+Average amount: <%= @company.operations.average(:amount).round(2) %><br>
+Maximum amount: <%= @company.operations.maximum(:amount) %><br>
+Maximum amount of current month: <%= @company.operations.where("operation_date > ?", Date.today.at_beginning_of_month).maximum(:amount) %><br>
+Accepted operations: <%= @company.operations.where(status: "accepted").count %><br>
+<hr>
+<table>
+  <tr>
+    <th>invoice nom</th>
+    <th>invoice date</th>
+    <th>operation date</th>
+    <th>amount</th>
+    <th>reporter</th>
+    <th>notes</th>
+    <th>status</th>
+    <th>kind</th>
+  </tr>
+  <% @company.operations.each do |operation| %>
+    <tr>
+      <td width="50"><%= operation.invoice_num %></td>
+      <td width="100"><%= operation.invoice_date %></td>
+      <td width="100"><%= operation.operation_date %></td>
+      <td width="20"><%= operation.amount %></td>
+      <td width="150"><%= operation.reporter %></td>
+      <td width="200"><%= operation.notes %></td>
+      <td width="100"><%= operation.status %></td>
+      <td width="100"><%= operation.kind %></td>
+      <td>
+      <%= link_to 'Delete', [operation.company, operation],
                  method:  :delete,
                  data: { confirm: 'Are you sure?' } %>
-  </p>
-<% end %>
-
-  <h2>Add Operation</h2>
+      </td>
+    </tr>
+  <% end %>
+</table>
+  <h3>Add new operation</h3>
   <%= form_for([@company, @company.operations.build]) do |f| %>
 
     <p><%= f.label :invoice_num %><%= f.text_field :invoice_num %></p>
@@ -26,7 +45,7 @@
     <p><%= f.label :amount %><%= f.text_field :amount %></p>
     <p><%= f.label :reporter %><%= f.text_field :reporter %></p>
     <p><%= f.label :notes %><%= f.text_area :notes %></p>
-    <p><%= f.label :status %><%= f.text_field :status %></p>
+    <p><%= f.label :status %><%= f.select :status, ['accepted','denied'] %></p>
     <p><%= f.label :kind %><%= f.text_field :kind %></p>
     <p>
       <%= f.submit %>
