@@ -2,32 +2,32 @@
 
 Operations count: <%= @company.operations.count %><br>
 Ttotal amount: <%= @company.total_amount %><br>
-Average amount: <%= @company.operations.average(:amount).round(2) %><br>
+Average amount: <%= @company.operations.average(:amount).round(2) if @company.operations.average(:amount) %><br>
 Maximum amount: <%= @company.operations.maximum(:amount) %><br>
-Maximum amount of current month: <%= @company.operations.where("operation_date > ?", Date.today.at_beginning_of_month).maximum(:amount) %><br>
+Maximum amount of current month: <%= @company.operations.where("operation_date >= ?", Date.today.at_beginning_of_month).maximum(:amount) %><br>
 Accepted operations: <%= @company.operations.where(status: "accepted").count %><br>
 <hr>
 <table>
   <tr>
-    <th>invoice nom</th>
-    <th>invoice date</th>
-    <th>operation date</th>
-    <th>amount</th>
-    <th>reporter</th>
-    <th>notes</th>
-    <th>status</th>
-    <th>kind</th>
+    <th width="50">invoice nom</th>
+    <th width="100">invoice date</th>
+    <th width="100">operation date</th>
+    <th width="20">amount</th>
+    <th width="150">reporter</th>
+    <th width="200">notes</th>
+    <th width="100">status</th>
+    <th width="100">kind</th>
   </tr>
   <% @company.operations.each do |operation| %>
     <tr>
-      <td width="50"><%= operation.invoice_num %></td>
-      <td width="100"><%= operation.invoice_date %></td>
-      <td width="100"><%= operation.operation_date %></td>
-      <td width="20"><%= operation.amount %></td>
-      <td width="150"><%= operation.reporter %></td>
-      <td width="200"><%= operation.notes %></td>
-      <td width="100"><%= operation.status %></td>
-      <td width="100"><%= operation.kind %></td>
+      <td><%= operation.invoice_num %></td>
+      <td><%= operation.invoice_date %></td>
+      <td><%= operation.operation_date %></td>
+      <td><%= operation.amount %></td>
+      <td><%= operation.reporter %></td>
+      <td><%= operation.notes %></td>
+      <td><%= operation.status %></td>
+      <td><%= operation.kind %></td>
       <td>
       <%= link_to 'Delete', [operation.company, operation],
                  method:  :delete,
