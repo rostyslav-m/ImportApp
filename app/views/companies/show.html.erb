@@ -1,7 +1,7 @@
-<p>Company: <strong><%= @company.name %></strong></p>
+<h1><%= @company.name %></h1>
 
 Operations count: <%= @company.operations.count %><br>
-Ttotal amount: <%= @company.total_amount %><br>
+Total amount: <%= @company.total_amount %><br>
 Average amount: <%= @company.operations.average(:amount).round(2) if @company.operations.average(:amount) %><br>
 Maximum amount: <%= @company.operations.maximum(:amount) %><br>
 Maximum amount of current month: <%= @company.operations.where("operation_date >= ?", Date.today.at_beginning_of_month).maximum(:amount) %><br>
