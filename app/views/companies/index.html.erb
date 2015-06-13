@@ -7,19 +7,18 @@
       <th></th>
       <th></th>
     </tr>
-
     <% @companies.each do |company| %>
       <tr>
-        <td width="300"><%= link_to company.name, company_path(company) %></td>
+        <td><b><%= link_to company.name, company_path(company) %></b></td>
         <td>
-        Operations count: <%= company.operations.count %>
-        Total amount: <%= company.total_amount %>
-        Average amount: <%= company.operations.average(:amount).round(2) if company.operations.average(:amount) %>
-        Maximum amount: <%= company.operations.maximum(:amount) %>
-        Maximum amount of current month: <%= company.operations.where("operation_date >= ?", Date.today.at_beginning_of_month).maximum(:amount) %>
-        Accepted operations: <%= company.operations.where(status: "accepted").count %>
+        <i>Operations count: </i><%= company.operations.count %>
+        <i>Total amount: </i><%= company.total_amount %>
+        <i>Average amount: </i><%= company.operations.average(:amount).round(2) if company.operations.average(:amount) %>
+        <i>Maximum amount: </i><%= company.operations.maximum(:amount) %>
+        <i>Maximum amount of current month: </i><%= company.operations.where("operation_date >= ?", Date.today.at_beginning_of_month).maximum(:amount) %>
+        <i>Accepted operations: </i><%= company.operations.where(status: "accepted").count %>
         </td>
-      </tr>
+     </tr>
 
       <table>
         <tr>
@@ -31,6 +30,7 @@
           <th width="200">notes</th>
           <th width="100">status</th>
           <th width="100">kind</th>
+          <th width="100"></th>
         </tr>
         <% company.operations.each do |operation| %>
           <tr>
@@ -41,9 +41,15 @@
             <td><%= operation.reporter %></td>
             <td><%= operation.notes %></td>
             <td><%= operation.status %></td>
-            <td><%= operation.kind %></td>            
+            <td><%= operation.kind %></td>
+            <td>
+            <% operation.categories.each do |category| %>
+              <%= link_to category.name, category_path(category) %>
+            <% end %>
+            </td>            
           </tr>
         <% end %>
       </table>
+      <hr>
     <% end %>
   </table>

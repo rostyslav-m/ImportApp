@@ -18,7 +18,7 @@ class OperationsController < ApplicationController
 
   private
     def operation_params
-      params.require(:operation).permit(:invoice_num, :invoice_date, :operation_date, :amount, :reporter, :notes, :status, :kind)
+      params.require(:operation).permit(:invoice_num, :invoice_date, :operation_date, :amount, :reporter, :notes, :status, :kind, :category_ids => [])
     end
 
   private

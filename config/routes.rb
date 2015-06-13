@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :operations
   end
   
+  resources :categories
+
   root 'companies#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

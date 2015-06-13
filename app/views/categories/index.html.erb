@@ -1,0 +1,18 @@
+<h1>Categories</h1>
+
+<table cols="3"  >
+   <tr>
+     <th width=80%></th>
+     <th width="40px" ></th>
+     <th width="40px" ></th>
+   </tr>
+  <% @categories.each do |category| %>
+      <tr>
+        <td><%= link_to category.name, category_path(category) %></td>
+        <td><%= link_to 'Edit', edit_category_path(category) %></td>
+        <td><%= link_to 'Destroy', category_path(category),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>
