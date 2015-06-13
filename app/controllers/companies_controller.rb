@@ -2,14 +2,14 @@ class CompaniesController < ApplicationController
 
   before_filter :find_company, only: [:show, :edit, :update, :destroy]
 
-#  def index
-#    @companies = Company.all
-#  end
-
   def index
-    @search = Company.search(params[:q])
-    @companies = @search.result.includes(:operations)
+    @companies = Company.all
   end
+
+#  def index
+#    @search = Company.search(params[:q])
+#    @companies = @search.result.includes(:operations)
+#  end
 
   def show
   end
