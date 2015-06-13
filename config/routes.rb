@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :companies do
     resources :operations
   end
-  
+
+  resources :operations
+
   resources :categories
 
   root 'companies#index'

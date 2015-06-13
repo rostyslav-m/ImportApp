@@ -3,6 +3,11 @@ class OperationsController < ApplicationController
   before_filter :find_company
 #, only: [:show, :edit, :update, :destroy]
 
+#  def index
+#    @q = Operation.ransack(params[:q])
+#    @operation = @q.result
+#  end
+
   def create
 #    @article = Article.find(params[:article_id])
     @operation = @company.operations.create(operation_params)

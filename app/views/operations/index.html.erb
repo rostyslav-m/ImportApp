@@ -1,40 +1,28 @@
-<h1>Companies</h1>
+<h1>Operations</h1>
 
 <%=link_to 'New Company', new_company_path %><br><br>
 
 <%= search_form_for @search do |f|  %>
     <b>Search: </b><br>
-    <%= f.label :name_cont %>
-    <%= f.text_field :name_cont %>
+
+    <%= f.label :invoice_num_eq %>
+    <%= f.text_field :invoice_num_eq %>
+
+
+
+    <%#= f.label :name_cont %>
+    <%#= f.text_field :name_cont %>
     <br>
-    <%= f.label :operations_reporter_or_operations_kind_cont %>
-    <%= f.text_field :operations_reporter_or_operations_kind_cont %>
+    <%#= f.label :operations_reporter_or_operations_kind_cont %>
+    <%#= f.text_field :operations_reporter_or_operations_kind_cont %>
     <br>
-    <%= f.label :operations_invoice_num_eq %>
-    <%= f.text_field :operations_invoice_num_eq %>
+    <%#= f.label :operations_invoice_num_eq %>
+    <%#= f.text_field :operations_invoice_num_eq %>
     <br>
     <%= f.submit "Search" %>
 <% end %>
 
 
-
-  <table>
-    <tr>
-      <th></th>
-      <th></th>
-    </tr>
-    <% @companies.each do |company| %>
-      <tr>
-        <td><b><%= link_to company.name, company_path(company) %></b></td>
-        <td>
-        <i>Operations count: </i><%= company.operations.count %>
-        <i>Total amount: </i><%= company.total_amount %>
-        <i>Average amount: </i><%= company.operations.average(:amount).round(2) if company.operations.average(:amount) %>
-        <i>Maximum amount: </i><%= company.operations.maximum(:amount) %>
-        <i>Maximum amount of current month: </i><%= company.operations.where("operation_date >= ?", Date.today.at_beginning_of_month).maximum(:amount) %>
-        <i>Accepted operations: </i><%= company.operations.where(status: "accepted").count %>
-        </td>
-     </tr>
 
       <table>
         <tr>
@@ -48,7 +36,7 @@
           <th width="100">kind</th>
           <th width="100"></th>
         </tr>
-        <% company.operations.each do |operation| %>
+        <% operations.each do |operation| %>
           <tr>
             <td><%= operation.invoice_num %></td>
             <td><%= operation.invoice_date %></td>
@@ -66,6 +54,3 @@
           </tr>
         <% end %>
       </table>
-      <hr>
-    <% end %>
-  </table>
