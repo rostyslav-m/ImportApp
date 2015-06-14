@@ -2,6 +2,13 @@
 
 <%= search_form_for @search, url: search_operations_path, method: :post do |f| %>
   <b>Search by: </b><br>
+
+    <%#= f.label :company_id_eq, "Company" %>
+    <%#= f.collection_select :company_id_eq, Company.all, :id, :name %>
+    <%= f.label :company_name_cont, "Company" %>
+    <%= f.text_field :company_name_cont %>
+    <br>
+
     <%= f.label :invoice_num %>
     <%= f.text_field :invoice_num_eq %>
     <br>
@@ -21,6 +28,10 @@
     
 <% end %>
 
+<p>
+  Download:
+  <%= link_to 'csv', search_operations_path(params.merge(format: 'csv')) %>
+</p>
       <table>
         <tr>
 
