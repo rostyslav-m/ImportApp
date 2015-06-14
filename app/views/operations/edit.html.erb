@@ -1,0 +1,19 @@
+<h1>Edit Operation</h1>
+
+  <%= simple_form_for  :operation, url: operation_path(@operation), method: :patch do |f| %>
+    <%= f.input :invoice_num %>
+    <%= f.input :invoice_date %>
+    <%= f.input :operation_date %>
+    <%= f.input :amount %>
+    <%= f.input :reporter %>
+    <%= f.input :notes %>
+    <%= f.input :status, collection: ['accepted','denied'], as: :radio_buttons %>
+    <%= f.input :kind %>
+    <%= f.label 'Company' %>
+    <%= f.collection_select :company_id, Company.all, :id, :name %><br>
+    <%= f.label 'Categories' %>
+    <%= f.collection_check_boxes :category_ids, Category.order(:name), :id, :name %><br><br>
+    <%= f.button :submit %>
+  <% end %>
+<br/>
+<%= link_to 'Back', operation_path(@operation) %>

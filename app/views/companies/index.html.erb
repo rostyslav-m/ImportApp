@@ -2,22 +2,6 @@
 
 <%=link_to 'New Company', new_company_path %><br><br>
 
-<%#= search_form_for @search do |f|  %>
-    <b>Search: </b><br>
-    <%#= f.label :name_cont %>
-    <%#= f.text_field :name_cont %>
-    <br>
-    <%#= f.label :operations_reporter_or_operations_kind_cont %>
-    <%#= f.text_field :operations_reporter_or_operations_kind_cont %>
-    <br>
-    <%#= f.label :operations_invoice_num_eq %>
-    <%#= f.text_field :operations_invoice_num_eq %>
-    <br>
-    <%#= f.submit "Search" %>
-<%# end %>
-
-
-
   <table>
     <tr>
       <th></th>
@@ -38,14 +22,15 @@
 
       <table>
         <tr>
-          <th width="50">invoice nom</th>
-          <th width="100">invoice date</th>
-          <th width="100">operation date</th>
-          <th width="20">amount</th>
+          <th width="100">invoice nom</th>
+          <th width="150">invoice date</th>
+          <th width="150">operation date</th>
+          <th width="100">amount</th>
           <th width="150">reporter</th>
           <th width="200">notes</th>
           <th width="100">status</th>
           <th width="100">kind</th>
+          <th width="200">categories</th>
           <th width="100"></th>
         </tr>
         <% company.operations.each do |operation| %>

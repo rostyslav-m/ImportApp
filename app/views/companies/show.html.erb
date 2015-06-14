@@ -9,20 +9,20 @@ Accepted operations: <%= @company.operations.where(status: "accepted").count %><
 <hr>
 <table>
   <tr>
-    <th width="50">invoice nom</th>
-    <th width="100">invoice date</th>
-    <th width="100">operation date</th>
-    <th width="20">amount</th>
+    <th width="100">invoice nom</th>
+    <th width="150">invoice date</th>
+    <th width="150">operation date</th>
+    <th width="100">amount</th>
     <th width="150">reporter</th>
     <th width="200">notes</th>
     <th width="100">status</th>
     <th width="100">kind</th>
-    <th width="100"></th>
+    <th width="200">categories</th>
     <th width="100"></th>
   </tr>
   <% @company.operations.each do |operation| %>
     <tr>
-      <td><%= operation.invoice_num %></td>
+      <td><%= link_to operation.invoice_num, operation_path(operation) %></td>
       <td><%= operation.invoice_date %></td>
       <td><%= operation.operation_date %></td>
       <td><%= operation.amount %></td>
@@ -35,30 +35,14 @@ Accepted operations: <%= @company.operations.where(status: "accepted").count %><
         <%= link_to category.name, category_path(category) %>
       <% end %>
       </td>
-      <td>
-      <%#= link_to 'Delete', [operation.company, operation],
-                 method:  :delete,
-                 data: { confirm: 'Are you sure?' } %>
+      <td><%= link_to 'Destroy', operation_path(operation),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
       </td>
     </tr>
   <% end %>
 </table>
-  <h3>Add new operation</h3>
-  <%#= simple_form_for([@company, @company.operations.build]) do |f| %>
-    <%#= f.input :invoice_num %>
-    <%#= f.input :invoice_date %>
-    <%#= f.input :operation_date %>
-    <%#= f.input :amount %>
-    <%#= f.input :reporter %>
-    <%#= f.input :notes %>
-    <%#= f.input :status, collection: ['accepted','denied'], as: :radio_buttons %>
-    <%#= f.input :kind %>
-    <%#= f.association :categories, as: :check_boxes %><br>
-    <%#= f.button :submit %>
-  <%# end %>
-
-
+<h3><%= link_to 'Add new operation', new_operation_path %></h3>
 <br/>
-<%= link_to 'Back', companies_path %>
-<%= link_to 'Edit', edit_company_path(@company) %>
+<%= link_to 'Edit Company info', edit_company_path(@company) %>
      

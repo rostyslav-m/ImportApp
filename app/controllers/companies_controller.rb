@@ -6,11 +6,6 @@ class CompaniesController < ApplicationController
     @companies = Company.all
   end
 
-#  def index
-#    @search = Company.search(params[:q])
-#    @companies = @search.result.includes(:operations)
-#  end
-
   def show
   end
 

@@ -1,0 +1,15 @@
+<h1>New Operation</h1>
+
+  <%= simple_form_for Operation.new do |f| %>
+    <%= f.input :invoice_num %>
+    <%= f.input :invoice_date %>
+    <%= f.input :operation_date %>
+    <%= f.input :amount %>
+    <%= f.input :reporter %>
+    <%= f.input :notes %>
+    <%= f.input :status, collection: ['accepted','denied'], as: :radio_buttons %>
+    <%= f.input :kind %>
+    <%= f.association :company %>
+    <%= f.association :categories, as: :check_boxes %><br>
+    <%= f.button :submit %>
+  <% end %>

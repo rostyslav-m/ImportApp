@@ -25,6 +25,10 @@ gem 'simple_form'
 
 gem 'ransack'
 
+gem "twitter-bootstrap-rails"
+
+gem 'bootstrap-sass'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

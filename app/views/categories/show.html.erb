@@ -2,8 +2,39 @@
 
   <h1><%= @category.name %></h1>
 
-<% @category.operations.each do |operation| %>
-  <li><%= operation.invoice_num %></li>
-  
-<% end %>
 
+
+
+
+    <table>
+        <tr>
+          <th width="50">invoice nom</th>
+          <th width="50">company</th>
+          <th width="100">invoice date</th>
+          <th width="100">operation date</th>
+          <th width="50">amount</th>
+          <th width="150">reporter</th>
+          <th width="200">notes</th>
+          <th width="100">status</th>
+          <th width="100">kind</th>
+          <th width="100">categories</th>
+        </tr>
+        <% @category.operations.each do |operation| %>
+          <tr>
+            <td><%= link_to operation.invoice_num, operation_path(operation) %></td>
+            <td><%= link_to operation.company.name, company_path(operation.company) %></td>
+            <td><%= operation.invoice_date %></td>
+            <td><%= operation.operation_date %></td>
+            <td><%= operation.amount %></td>
+            <td><%= operation.reporter %></td>
+            <td><%= operation.notes %></td>
+            <td><%= operation.status %></td>
+            <td><%= operation.kind %></td>
+            <td>
+            <% operation.categories.each do |category| %>
+              <%= link_to category.name, category_path(category) %>
+            <% end %>
+            </td>            
+          </tr>
+        <% end %>
+      </table>

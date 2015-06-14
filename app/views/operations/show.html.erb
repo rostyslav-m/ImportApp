@@ -1,0 +1,37 @@
+      <table>
+        <tr>
+          <th width="100">invoice nom</th>
+          <th width="200">company</th>
+          <th width="150">invoice date</th>
+          <th width="150">operation date</th>
+          <th width="100">amount</th>
+          <th width="150">reporter</th>
+          <th width="200">notes</th>
+          <th width="100">status</th>
+          <th width="100">kind</th>
+          <th width="200">categories</th>
+          <th width="100"></th>
+        </tr>
+          <tr>
+            <td><b><%= @operation.invoice_num %></b></td>
+            <td><%= link_to @operation.company.name, company_path(@operation.company) %></td>
+            <td><%= @operation.invoice_date %></td>
+            <td><%= @operation.operation_date %></td>
+            <td><%= @operation.amount %></td>
+            <td><%= @operation.reporter %></td>
+            <td><%= @operation.notes %></td>
+            <td><%= @operation.status %></td>
+            <td><%= @operation.kind %></td>
+            <td>
+            <% @operation.categories.each do |category| %>
+              <%= link_to category.name, category_path(category) %>
+            <% end %>
+            </td>
+            <td>
+            <%= link_to 'Edit', edit_operation_path(@operation) %>
+            <%= link_to 'Delete', operation_path(@operation),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+            </td>        
+          </tr>
+      </table>

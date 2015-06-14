@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :companies# do
-#    resources :operations
-#  end
+  resources :companies
 
-  resources :operations
-
+  resources :operations do
+    collection do
+      match 'search' => 'operations#index', :via => [:get, :post], :as => :search
+    end
+  end
   resources :categories
 
   root 'companies#index'

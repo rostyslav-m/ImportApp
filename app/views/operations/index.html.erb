@@ -1,49 +1,46 @@
 <h1>Operations</h1>
 
-<%=link_to 'New Company', new_company_path %><br><br>
-
-<b>Search: </b><br>
-
-<%= search_form_for @search do |f|  %>
-
-
-    <%= f.label :invoice_num_eq %>
+<%= search_form_for @search, url: search_operations_path, method: :post do |f| %>
+  <b>Search by: </b><br>
+    <%= f.label :invoice_num %>
     <%= f.text_field :invoice_num_eq %>
-
-
-
-    <%#= f.label :name_cont %>
-    <%#= f.text_field :name_cont %>
     <br>
-    <%#= f.label :operations_reporter_or_operations_kind_cont %>
-    <%#= f.text_field :operations_reporter_or_operations_kind_cont %>
+    <%= f.label :reporter_or_status_or_kind_cont, "Reporter, Status or Kind" %>
+    <%= f.text_field :reporter_or_status_or_kind_cont %>
     <br>
-    <%#= f.label :operations_invoice_num_eq %>
-    <%#= f.text_field :operations_invoice_num_eq %>
+    <%= f.label :amount_gteq, "Amount between" %>
+    <%= f.text_field :amount_gteq %>
+    <%= f.label :amount_lteq, "and" %>
+    <%= f.text_field :amount_lteq %>
     <br>
-    <%#= f.submit "Search" %>
+    <%= f.collection_check_boxes :categories_id_eq_any, Category.order(:name), :id, :name %>
+    <br>
+    <%= f.submit "Search" %> 
+
+    <%= link_to ' Clear', operations_path %>
+    
 <% end %>
-
-
 
       <table>
         <tr>
-          <th width="200">Company</th>
-          <th width="50">invoice nom</th>
-          <th width="100">invoice date</th>
-          <th width="100">operation date</th>
-          <th width="20">amount</th>
-          <th width="150">reporter</th>
-          <th width="200">notes</th>
-          <th width="100">status</th>
-          <th width="100">kind</th>
+
+          <th width="200"><%= sort_link @search, :company_name, "Company" %></th>
+          <th width="100"><%= sort_link @search, :invoice_num, "invoice" %></th>
+          <th width="150"><%= sort_link @search, :invoice_date, "invoice date" %></th>
+          <th width="150"><%= sort_link @search, :operation_date, "operation date" %></th>
+          <th width="100"><%= sort_link @search, :amount, "amount" %></th>
+          <th width="150"><%= sort_link @search, :reporter, "reporter" %></th>
+          <th width="200"><%= sort_link @search, :notes, "notes" %></th>
+          <th width="100"><%= sort_link @search, :status, "status" %></th>
+          <th width="100"><%= sort_link @search, :kind, "kind" %></th>
+          <th width="200"><%= sort_link @search, :categories, "categories" %></th>
           <th width="100"></th>
         </tr>
         <% @operations.each do |operation| %>
           <tr>
 
             <td><%= link_to operation.company.name, company_path(operation.company) %></td>
-            <td><%= operation.invoice_num %></td>
+            <td><%= link_to operation.invoice_num, operation_path(operation) %></td>
             <td><%= operation.invoice_date %></td>
             <td><%= operation.operation_date %></td>
             <td><%= operation.amount %></td>
@@ -55,7 +52,11 @@
             <% operation.categories.each do |category| %>
               <%= link_to category.name, category_path(category) %>
             <% end %>
-            </td>            
+            </td>
+            <td><%= link_to 'Destroy', operation_path(operation),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+            </td>        
           </tr>
         <% end %>
       </table>
