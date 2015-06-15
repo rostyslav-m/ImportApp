@@ -7,6 +7,11 @@ Rails.application.routes.draw do
       match 'search' => 'operations#index', :via => [:get, :post], :as => :search
     end
   end
+
+  resources :operations do
+    collection { post :import }
+  end
+
   resources :categories
 
   root 'companies#index'

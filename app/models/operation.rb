@@ -3,9 +3,9 @@ class Operation < ActiveRecord::Base
   belongs_to              :company
   has_and_belongs_to_many :categories
 
-#  validates_presence_of :invoice_num, :invoice_date, :amount, :operation_date, :kind, :status
-#  validates_numericality_of :amount, greater_than: 0
-#  validates_uniqueness_of :invoice_num
+  validates_presence_of :invoice_num, :invoice_date, :amount, :operation_date, :kind, :status
+  validates_numericality_of :amount, greater_than: 0
+  validates_uniqueness_of :invoice_num
 
   def self.to_csv
     CSV.generate do |csv|
@@ -16,13 +16,19 @@ class Operation < ActiveRecord::Base
     end
   end
 
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      Operation.create! row.to_hash
+    end
+  end
 
-#    CSV.generate do |csv|
-#      csv << column_names
-#      all.each do |operation|
-#        csv << operation.attributes.values_at(*column_names)
-#      end
+#  def self.import(file)
+#    CSV.foreach(file.path, headers: true) do |row|
+#      operation = where(name: row["name"]).first_or_create!(row.to_hash.slice(*accessible_attributes))
+#      company = Company.find_by_name(row["company"])
+#      operation.company = company      
+#      operation.save!
 #    end
-#  end
+#  end  
 
 end

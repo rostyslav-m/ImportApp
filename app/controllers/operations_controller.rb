@@ -8,7 +8,6 @@ class OperationsController < ApplicationController
       respond_to do |format|
         format.html
         format.csv { send_data @operations.to_csv }
-#        format.xls # { send_data @products.to_csv(col_sep: "\t") }
       end
   end
 
@@ -41,6 +40,15 @@ class OperationsController < ApplicationController
   def destroy
     @operation.destroy
     redirect_to  @operation.company
+  end
+
+  def import
+    begin
+      Operation.import(params[:file])
+      redirect_to operations_path, notice: "Operations import Successfully"    
+    rescue
+      redirect_to operations_path, notice: "Invalid CSV file format."
+    end
   end
 
   private

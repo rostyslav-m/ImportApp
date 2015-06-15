@@ -1,11 +1,6 @@
 <i>Category</i>
 
   <h1><%= @category.name %></h1>
-
-
-
-
-
     <table>
         <tr>
           <th width="50">invoice nom</th>
@@ -22,7 +17,7 @@
         <% @category.operations.each do |operation| %>
           <tr>
             <td><%= link_to operation.invoice_num, operation_path(operation) %></td>
-            <td><%= link_to operation.company.name, company_path(operation.company) %></td>
+            <td><%= link_to operation.company.name, company_path(operation.company) if operation.company %></td>
             <td><%= operation.invoice_date %></td>
             <td><%= operation.operation_date %></td>
             <td><%= operation.amount %></td>

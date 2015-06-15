@@ -14,7 +14,7 @@
         </tr>
           <tr>
             <td><b><%= @operation.invoice_num %></b></td>
-            <td><%= link_to @operation.company.name, company_path(@operation.company) %></td>
+            <td><%= link_to @operation.company.name, company_path(@operation.company)  if @operation.company %></td>
             <td><%= @operation.invoice_date %></td>
             <td><%= @operation.operation_date %></td>
             <td><%= @operation.amount %></td>

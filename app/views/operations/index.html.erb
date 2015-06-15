@@ -32,6 +32,13 @@
   Download:
   <%= link_to 'csv', search_operations_path(params.merge(format: 'csv')) %>
 </p>
+
+<b> Import</b>
+<%= form_tag import_operations_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
       <table>
         <tr>
 
@@ -50,7 +57,7 @@
         <% @operations.each do |operation| %>
           <tr>
 
-            <td><%= link_to operation.company.name, company_path(operation.company) %></td>
+            <td><%= link_to operation.company.name, company_path(operation.company) if operation.company %></td>
             <td><%= link_to operation.invoice_num, operation_path(operation) %></td>
             <td><%= operation.invoice_date %></td>
             <td><%= operation.operation_date %></td>
