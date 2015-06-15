@@ -11,5 +11,3 @@ Users can download the data as CSV-format with all operations or after searching
 
 The import of operations from CSV file into Data base possible from the file without fields with connections.
 TODO: More flexible import of operations from CSV file.
-
-Preview on Heroku:  https://importapp55.herokuapp.com

@@ -23,17 +23,17 @@ class OperationsController < ApplicationController
   def create
     @operation = Operation.new(operation_params)
     if @operation.save
-      redirect_to @operation.company
+      redirect_to @operation, notice: "Operations create Successfully!"
     else
-      render 'new'
+      render 'new', notice: "Invalid format or obligatory field is blank!"
     end
   end
 
   def update
     if @operation.update(operation_params)
-      redirect_to @operation
+      redirect_to @operation, notice: "Operations update Successfully!"
     else
-      render 'edit'
+      render 'edit', notice: "Invalid format or obligatory field is blank!"
     end
   end
 
