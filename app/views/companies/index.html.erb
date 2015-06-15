@@ -35,12 +35,12 @@
         </tr>
         <% company.operations.each do |operation| %>
           <tr>
-            <td><%= operation.invoice_num %></td>
+            <td><%= link_to operation.invoice_num, operation_path(operation) %></td>
             <td><%= operation.invoice_date %></td>
             <td><%= operation.operation_date %></td>
             <td><%= operation.amount %></td>
             <td><%= operation.reporter %></td>
-            <td><%= operation.notes %></td>
+            <td><%= truncate(operation.notes, length: 40) %></td>
             <td><%= operation.status %></td>
             <td><%= operation.kind %></td>
             <td>

@@ -27,7 +27,7 @@ Accepted operations: <%= @company.operations.where(status: "accepted").count %><
       <td><%= operation.operation_date %></td>
       <td><%= operation.amount %></td>
       <td><%= operation.reporter %></td>
-      <td><%= operation.notes %></td>
+      <td><%= truncate(operation.notes, length: 40) %></td>
       <td><%= operation.status %></td>
       <td><%= operation.kind %></td>
       <td>
