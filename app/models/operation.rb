@@ -18,17 +18,11 @@ class Operation < ActiveRecord::Base
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
-      Operation.create! row.to_hash
+      company = Company.find_by_name(row["company"])
+      if company
+        Operation.create(:company_id => company.id, :invoice_num => row['invoice_num'], :invoice_date => row['invoice_date'], :operation_date => row['operation_date'], :amount => row['amount'], :reporter => row['reporter'], :notes => row['notes'], :status => row['status'], :kind => row['kind'] )
+      end
     end
   end
-
-#  def self.import(file)
-#    CSV.foreach(file.path, headers: true) do |row|
-#      operation = where(name: row["name"]).first_or_create!(row.to_hash.slice(*accessible_attributes))
-#      company = Company.find_by_name(row["company"])
-#      operation.company = company      
-#      operation.save!
-#    end
-#  end  
 
 end
