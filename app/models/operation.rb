@@ -11,7 +11,7 @@ class Operation < ActiveRecord::Base
     CSV.generate do |csv|
       csv << ["company", "invoice_num", "invoice_date", "operation_date", "amount", "reporter", "notes", "status", "kind"]
         all.each do |operation|
-          csv << [operation.company.name, operation.invoice_num, operation.invoice_date, operation.operation_date, operation.amount, operation.reporter, operation.notes, operation.status, operation.kind, operation.categories.collect { |o| o.name }.join(',') ]
+          csv << [operation.company.name, operation.invoice_num, operation.invoice_date, operation.operation_date, operation.amount, operation.reporter, operation.notes, operation.status, operation.kind, operation.categories.collect { |o| o.name }.join(';') ]
         end
     end
   end
@@ -20,7 +20,7 @@ class Operation < ActiveRecord::Base
     CSV.foreach(file.path, headers: true) do |row|
       company = Company.find_by_name(row["company"])
       if company
-        Operation.create(:company_id => company.id, :invoice_num => row['invoice_num'], :invoice_date => row['invoice_date'], :operation_date => row['operation_date'], :amount => row['amount'], :reporter => row['reporter'], :notes => row['notes'], :status => row['status'], :kind => row['kind'] )
+        Operation.create(:company_id => company.id, :invoice_num => row['invoice_num'], :invoice_date => row['invoice_date'], :operation_date => row['operation_date'], :amount => row['amount'], :reporter => row['reporter'], :notes => row['notes'], :status => row['status'], :kind => row['kind'])
       end
     end
   end

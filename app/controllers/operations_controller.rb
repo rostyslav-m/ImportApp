@@ -39,7 +39,7 @@ class OperationsController < ApplicationController
 
   def destroy
     @operation.destroy
-    redirect_to  @operation.company
+    redirect_to  operations_path
   end
 
   def import
